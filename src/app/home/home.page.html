@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Модульна контрольна робота №1
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,61 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Варіант 13</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Завдання</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Створити клас точка і дочірні від нього - окружність, кільце і еліпс. 
+        Визначити конструктори, методи розрахунку площини. 
+        Визначити методи переустановлення центру кола, кільця і еліпса.
+        Розробити сервіс для проведення обчисленнь та для роботи зі списком фігур.
+        Користувач повинен ввести кількість фігур кожного типу.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Форма для введення кількості фігур кожного типу -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Введіть кількість фігур кожного типу</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="shapeForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="stacked">Circle Count:</ion-label>
+          <ion-input type="number" formControlName="circleCount"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Ring Count:</ion-label>
+          <ion-input type="number" formControlName="ringCount"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Ellipse Count:</ion-label>
+          <ion-input type="number" formControlName="ellipseCount"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit" [disabled]="!shapeForm.valid">Generate Shapes</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Результати -->
+  <ion-card *ngFor="let shapeResult of shapeResults">
+    <ion-card-header>
+      <ion-card-title>{{ shapeResult.type }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Area: {{ shapeResult.area }}</p>
+      <p>Details: {{ shapeResult.details | json }}</p>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
